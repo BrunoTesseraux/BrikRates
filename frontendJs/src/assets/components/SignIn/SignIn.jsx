@@ -1,22 +1,13 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState } from 'react';
 import './SignIn.scss';
 
-interface SignInProps {
-  onLogin: () => void;
-}
-
-interface SignInFormData {
-  email: string;
-  password: string;
-}
-
-const SignIn: React.FC<SignInProps> = ({ onLogin }) => {
-  const [formData, setFormData] = useState<SignInFormData>({
+const SignIn = ({ onLogin }) => {
+  const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -24,9 +15,8 @@ const SignIn: React.FC<SignInProps> = ({ onLogin }) => {
     });
   };
 
-
   // vorläufiger login hier muss noch die logik rien 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission (e.g., send data to the server)
     console.log('Sign in form submitted:', formData);
@@ -37,8 +27,8 @@ const SignIn: React.FC<SignInProps> = ({ onLogin }) => {
     <div className="sign-in">
       <div className="background"></div>
       <form onSubmit={handleSubmit}>
-        <h2>Log in to Scrapy</h2>
-        <p>The easyest solution for price comparison</p>
+        <h2>Log in to BrikRates</h2>
+        <p>The easiest solution for price comparison</p>
         <div className='input-wrapper'>
           <label htmlFor="email">Email:</label>
           <input

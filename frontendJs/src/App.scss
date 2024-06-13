@@ -1,0 +1,59 @@
+@font-face {
+    font-family: "roboto-regular";
+    src: url(./assets/fonts/Roboto-Regular.ttf);
+  }
+  @font-face {
+    font-family: "roboto-bold";
+    src: url(./assets/fonts/Roboto-Bold.ttf);
+  }
+  @font-face {
+    font-family: "roboto-light";
+    src: url(./assets/fonts/Roboto-Light.ttf);
+  }
+  
+  :root {
+    --color1-light: #F8F9FA; /* very light grey */
+    --color2-light: #E9ECEF; /* light grey */
+    --color1-dark: #ADB5BD;  /* medium grey */
+    --color2-dark: #6C757D;  /* dark grey */
+  }
+  
+  
+  // Primärfarben: Blau (#007BFF) und Grün (#28A745)
+  // Sekundärfarben: Grau (#6C757D) und Weiß (#FFFFFF)
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "roboto-regular";
+  }
+  
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  
+  .app-container {
+    background-image: linear-gradient(
+      to right,
+      var(--color1-light) 0%,
+      var(--color1-light) 20%,
+      var(--color2-light) 40%,
+      var(--color1-dark) 60%,
+      var(--color1-dark) 80%,
+      var(--color2-dark) 100%
+    );
+    background-size: 250% 100%;
+    background-position: 100% 0%;
+    transition: background-position 0.5s;
+    display: flex;
+  }
+  
+  .dark-mode .app-container {
+    background-position: 0% 0%;
+  }
+  
+  .app-container .main-content {
+    flex: 1;
+  }
