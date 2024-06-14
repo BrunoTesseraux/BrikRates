@@ -1,12 +1,12 @@
 const HotelMenu = ({
-    exampleResponse,
+    fetchedData,
     selectedHotels,
     handleHotelToggle,
     handleColorChange
 }) => {
     return (
         <div className="hotel-menu">
-            {exampleResponse.map((hotel) => (
+            {fetchedData.map((hotel) => (
                 <div key={hotel.hotelName}>
                     <input
                         type="checkbox"
