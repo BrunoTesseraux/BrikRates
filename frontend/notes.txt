@@ -1,0 +1,88 @@
+import mongoose, { Schema, Document } from 'mongoose';
+
+// User Model
+interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  settings: {
+    darkMode: boolean;
+  };
+  subscriptionStatus: string;
+}
+
+const UserSchema = new Schema<IUser>({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  settings: {
+    darkMode: { type: Boolean, default: false },
+  },
+  subscriptionStatus: { type: String, required: true },
+});
+
+const User = mongoose.model<IUser>('User', UserSchema);
+
+// WatchedHotel Model
+interface IWatchedHotel extends Document {
+  name: string;
+  location: string;
+}
+
+const WatchedHotelSchema = new Schema<IWatchedHotel>({
+  name: { type: String, required: true },
+  location: { type: String, required: true },
+});
+
+const WatchedHotel = mongoose.model<IWatchedHotel>('WatchedHotel', WatchedHotelSchema);
+
+// RoomType Model
+interface IRoomType extends Document {
+  hotelId: Schema.Types.ObjectId;
+  type: string;
+  size: number;
+  features: string[];
+}
+
+const RoomTypeSchema = new Schema<IRoomType>({
+  hotelId: { type: Schema.Types.ObjectId, ref: 'WatchedHotel', required: true },
+  type: { type: String, required: true },
+  size: { type: Number, required: true },
+  features: { type: [String], required: true },
+});
+
+const RoomType = mongoose.model<IRoomType>('RoomType', RoomTypeSchema);
+
+// PriceRecord Model
+interface IPriceRecord extends Document {
+  hotelId: Schema.Types.ObjectId;
+  roomTypeId: Schema.Types.ObjectId;
+  dateCollected: Date;
+  priceToday: number;
+  priceInOneMonth: number;
+}
+
+const PriceRecordSchema = new Schema<IPriceRecord>({
+  hotelId: { type: Schema.Types.ObjectId, ref: 'WatchedHotel', required: true },
+  roomTypeId: { type: Schema.Types.ObjectId, ref: 'RoomType', required: true },
+  dateCollected: { type: Date, required: true, index: true },
+  priceToday: { type: Number, required: true },
+  priceInOneMonth: { type: Number, required: true },
+});
+
+const PriceRecord = mongoose.model<IPriceRecord>('PriceRecord', PriceRecordSchema);
+
+// Observation Model
+interface IObservation extends Document {
+  userId: Schema.Types.ObjectId;
+  hotelId: Schema.Types.ObjectId;
+  color: string;
+}
+
+const ObservationSchema = new Schema<IObservation>({
+  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+  hotelId: { type: Schema.Types.ObjectId, ref: 'WatchedHotel', required: true },
+  color: { type: String, required: true },
+});
+
+const Observation = mongoose.model<IObservation>('Observation', ObservationSchema);

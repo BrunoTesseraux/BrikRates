@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
 import './Sidebar.scss';
+import DarkMode from '../DarkMode/DarkMode';
 
-const Sidebar: React.FC = () => {
 
-  return (
+const Sidebar = () => {
+    return (     
     <div className="sidebar">
-      <div className="greeting">
+        <div className="greeting">
         <h1>Hallo</h1>
         <h2>Peter</h2>
-      </div>
-      <div className="links">
+        </div>
+        <DarkMode/>
+        <div className="links">
         <Link to="/dashboard">
             <img src="./dashboard.png" alt="" />
             Dashboard
@@ -22,9 +24,9 @@ const Sidebar: React.FC = () => {
             <img src="./line-chart.png" alt="" />
             Charts
         </Link>
-      </div>
-      <h2>Support</h2>
-      <div className="links">
+        </div>
+        <h2>Support</h2>
+        <div className="links">
         <Link to="/faq">
             <img src="./question.png" alt="" />
             Faq
@@ -37,18 +39,16 @@ const Sidebar: React.FC = () => {
             <img src="./settings.png" alt="" />
             Settings
         </Link>
-      </div>
-      <div className="profile">
-        <h3>Scrapy Boys</h3>
-        <img src="./scrapy.jpg" alt="Logo" />
+        </div>
+        <div className="profile">
+        <img src="./briktech2.webp" alt="Logo" />
         <p>founded 2024</p>
-      </div>
-      <button>
+        </div>
+        <button>
         <img src="./logout.svg" alt="" />
         Logout
-      </button>
-    </div>
-  );
-};
+        </button>
+    </div> );
+}
 
 export default Sidebar;
