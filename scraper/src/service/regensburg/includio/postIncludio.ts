@@ -2,7 +2,7 @@ import Hotel from "../../../models/Hotel";
 import { IPriceRecord, IScrapedPrice } from "../../../models/interfaces/Interfaces";
 import PriceRecord from "../../../models/PriceRecord";
 import RoomType from "../../../models/RoomType";
-import { isHotel, isRoomType } from "../../utils/typeGuards";
+import { isHotel, isRoomType } from "./utils/typeGuards";
 import { Types } from "mongoose";
 
 export const postIncludio = {
