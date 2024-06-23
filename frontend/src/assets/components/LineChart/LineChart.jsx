@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import HotelMenu from './HotelMenu';
 import ReactApexChart from 'react-apexcharts';
 import './LineChart.scss';
