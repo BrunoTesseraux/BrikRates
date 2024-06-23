@@ -48,3 +48,10 @@ export interface IScrapedPrice {
   date: Date;
   priceIn30Days: string;
 }
+
+export interface IHotelConfig {
+    name: string;
+    url: string;
+    city: string;
+    scrapeFunction: (url: string) => Promise<IScrapedPrice[]>;
+}

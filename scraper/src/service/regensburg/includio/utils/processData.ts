@@ -1,6 +1,7 @@
 import { IScrapedPrice } from "../../../../models/interfaces/Interfaces";
 
 
+
 export const processScrapedData = (inseratText: string): IScrapedPrice => {
     const regex = /(DOPPELZIMMER\s+[A-Z\s+\-]+|FAMILIENZIMMER)\s*\n*\s*(\d+\s*m²)\s*\n*\s*ab\s*(\d+,\d{2})\s*€/;
 
@@ -15,7 +16,7 @@ export const processScrapedData = (inseratText: string): IScrapedPrice => {
     return {
         typ, // room type
         size,
-        pricePerNight: pricePerNight,
+        pricePerNight,
         date,
         priceIn30Days: '' // Wir werden dieses Feld später in `getIncludio` ausfüllen
     };
