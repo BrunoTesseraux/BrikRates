@@ -1,20 +1,20 @@
 import cron from 'node-cron';
-import { IHotelConfig } from '../models/interfaces/Interfaces';
-import { scrapeHotelData } from '../service/scaperService';
-import { postScrapedData } from '../service/postScrapedData';
+import { postScrapedData } from '../service/postService';
+import { scrapeHotelData } from '../service/scraperService';
 import hotelConfigs from '../configHotel.ts/configs';
-
-const scrapeAndSave = async (hotel: IHotelConfig): Promise<void> => {
+import { IHotel } from '../models/interfaces/Interfaces';
+const scrapeAndSave = async (hotel: IHotel): Promise<void> => {
     try {
         const scrapedHotelData = await scrapeHotelData(hotel);
-        await postScrapedData.post(hotel.name, scrapedHotelData);
+        await postScrapedData(hotel.name, scrapedHotelData);
     } catch (error) {
-        console.error(`Fehler beim Scrapen und Speichern der Daten für ${hotel.name}:`, error);
+        const err = error as Error;
+        console.error(`Fehler beim Scrapen und Speichern der Daten für ${hotel.name}:`, err);
     }
 };
 
 export const scheduleScrapingJobs = () => {
-    const times = ['0 5 * * *', '41 20 * * *'];
+    const times = ['0 5 * * *', '28 17 * * *'];
     times.forEach(time => {
         cron.schedule(time, async () => {
             for (const hotel of hotelConfigs) {

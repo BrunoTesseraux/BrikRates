@@ -1,28 +1,28 @@
-// src/controller/scrapeController.ts
 import { Request, Response } from 'express';
+import { scrapeHotelData } from '../service/scraperService';
+import { postScrapedData } from '../service/postService';
 import hotelConfigs from '../configHotel.ts/configs';
-import { scrapeHotelData } from '../service/scaperService';
-import { IScrapedPrice } from '../models/interfaces/Interfaces';
-import { postScrapedData } from '../service/postScrapedData';
 
+export const scrapeAndSave = async (req: Request, res: Response): Promise<void> => {
+    const { hotelName } = req.params;
 
-export const hotelController = async (req: Request, res: Response) => {
-    const hotelName = req.params.hotelName;
-    const hotelConfig = hotelConfigs.find(hotel => hotel.name === hotelName);
-
-    if (!hotelConfig) {
-        return res.status(404).json({ error: 'Hotel not found' });
+    const hotel = hotelConfigs.find(h => h.name === hotelName);
+    if (!hotel) {
+        res.status(404).send(`Hotel ${hotelName} not found in configuration`);
+        return;
     }
 
     try {
-        const scrapedPriceData: IScrapedPrice[] = await scrapeHotelData(hotelConfig);
-        console.log("/CTRL/ Hotel-Details", scrapedPriceData);
-
-        const savedPrices = await postScrapedData.post(hotelConfig.name, scrapedPriceData);
-        res.json({ success: true, savedPrices });
+        const scrapedHotelData = await scrapeHotelData(hotel);
+        await postScrapedData(hotel.name, scrapedHotelData);
+        res.status(200).json({
+            message: 'Scraping and saving data successful',
+            data: scrapedHotelData
+        });
     } catch (error) {
-        const typedError = error as Error;
-        console.error('Fehler beim Scrapen der Website:', typedError);
-        res.status(500).json({ error: 'Fehler beim Scrapen der Website', details: typedError.message });
+        const err = error as Error;
+        if (!res.headersSent) {
+            res.status(500).send(`Error during scraping and saving data: ${err.message}`);
+        }
     }
 };

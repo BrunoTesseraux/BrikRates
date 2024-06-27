@@ -2,8 +2,8 @@ import { Types, Document } from 'mongoose';
 
 export interface IHotel extends Document {
   name: string;
-  address: string;
-  website: string;
+  city: string;
+  url: string;
 }
 
 export interface IPriceRecord extends Document {
@@ -47,11 +47,4 @@ export interface IScrapedPrice {
   pricePerNight: string;
   date: Date;
   priceIn30Days: string;
-}
-
-export interface IHotelConfig {
-    name: string;
-    url: string;
-    city: string;
-    scrapeFunction: (url: string) => Promise<IScrapedPrice[]>;
 }

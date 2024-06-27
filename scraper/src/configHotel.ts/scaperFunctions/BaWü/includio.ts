@@ -1,8 +1,6 @@
-import { JSDOM } from 'jsdom';
 import { IScrapedPrice } from '../../../models/interfaces/Interfaces';
 import puppeteer from 'puppeteer';
-import { utils } from '../../../service/regensburg/includio/utils';
-
+import { utils } from '../../../service/utils';
 
 export const includioScrapeFunction = async (url: string): Promise<IScrapedPrice[]> => {
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
@@ -14,7 +12,7 @@ export const includioScrapeFunction = async (url: string): Promise<IScrapedPrice
         return Array.from(priceElements).map(priceElement => {
             const element = priceElement as HTMLElement;
             let inseratText = element ? element.innerText : 'Preis nicht gefunden';
-            console.log(inseratText); // Debugging output
+            console.log(inseratText);
             return {
                 inseratText
             };

@@ -1,5 +1,4 @@
-import { IScrapedPrice } from "../../../../models/interfaces/Interfaces";
-
+import { IScrapedPrice } from "../../models/interfaces/Interfaces";
 
 
 export const processScrapedData = (inseratText: string): IScrapedPrice => {
