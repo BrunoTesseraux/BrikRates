@@ -1,6 +1,4 @@
-import { dateUtils } from "../../../../utils";
-
-
+import { dateUtils } from "../../utils";
 
 export const generateUrl = (arrivalDate: Date, departureDate: Date): string => {
     const formattedArrivalDate = dateUtils.formatDate(arrivalDate);

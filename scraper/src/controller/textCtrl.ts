@@ -1,7 +1,7 @@
 // src/controller/testScrapeController.ts
 import { Request, Response } from 'express';
 import hotelConfigs from '../configHotel.ts/configs';
-import { scrapeHotelData } from '../service/scaperService';
+import { scrapeHotelData } from '../service/scraperService';
 
 export const testScrapeController = async (req: Request, res: Response) => {
     const hotelName = req.params.hotelName;

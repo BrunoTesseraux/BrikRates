@@ -19,7 +19,7 @@ const startServer = async (): Promise<void>=> {
         console.log('Connected to MongoDB');
 
         // Server starten
-        const PORT: number = parseInt(process.env.PORT as string, 10) || 8080;
+        const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
         app.listen(PORT, () => {
             console.log(`Server is running at http://localhost:${PORT}`);
         });

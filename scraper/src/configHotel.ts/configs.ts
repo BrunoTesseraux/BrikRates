@@ -1,15 +1,11 @@
-import { IHotelConfig } from '../models/interfaces/Interfaces';
-import { includioScrapeFunction } from "./scaperFunctions/BaWü/includio";
+import { IHotel } from '../models/interfaces/Interfaces';
 
-
-const hotelConfigs: IHotelConfig[] = [
+const hotelConfigs: IHotel[] = [
     {
         name: "Includio",
-        url: "https://onepagebooking.com/includio?arrival={arrival}&departure={departure}&lang=de&adults=1&rooms=1&children=0",
         city: "Regensburg",
-        scrapeFunction: includioScrapeFunction
-    },
+        url: "https://onepagebooking.com/includio?arrival={arrival}&departure={departure}&lang=de&adults=1&rooms=1&children=0",
+    } as IHotel
 ];
 
 export default hotelConfigs;
-

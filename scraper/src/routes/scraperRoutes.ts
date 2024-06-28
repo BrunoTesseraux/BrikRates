@@ -1,10 +1,9 @@
 import express from 'express';
-import { hotelController } from '../controller/hotelConttroller';
-import { testScrapeController } from '../controller/textCtrl';
+import {  scrapeAndSave } from '../controller/hotelConttroller';
+
 
 const ScrapeRouter = express
 .Router()
-.post('/:hotelName', hotelController)
-.get('/:hotelName', testScrapeController)
+.post('/:hotelName', scrapeAndSave)
 
 export default ScrapeRouter;
