@@ -14,7 +14,7 @@ const scrapeAndSave = async (hotel: IHotel): Promise<void> => {
 };
 
 export const scheduleScrapingJobs = () => {
-    const times = ['0 5 * * *', '28 17 * * *'];
+    const times = ['0 5 * * *', '32 11 * * *'];
     times.forEach(time => {
         cron.schedule(time, async () => {
             for (const hotel of hotelConfigs) {
